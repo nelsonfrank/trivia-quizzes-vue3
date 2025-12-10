@@ -25,6 +25,7 @@ export const useQuizStore = defineStore('quiz', () => {
   const selectedAnswer = ref<number | null>(null)
   const timer = ref<number>(15)
   const loading = ref<boolean>(false)
+  const error = ref<string | null>(null)
   let timerInterval: number | null = null
 
   const categories = ref<Category[]>([
@@ -126,18 +127,29 @@ export const useQuizStore = defineStore('quiz', () => {
   const startQuiz = async (category: Category) => {
     selectedCategory.value = category
     loading.value = true
+    error.value = null
     screen.value = 'quiz'
     resetQuizState()
 
     try {
-      questions.value = await fetchQuestions(category)
+      const fetchedQuestions = await fetchQuestions(category)
+      if (fetchedQuestions.length === 0) {
+        throw new Error('No questions were returned for this category.')
+      }
+      questions.value = fetchedQuestions
       startTimer()
-    } catch (error) {
-      console.error('Failed to start quiz:', error)
-      // Optionally, handle the error in the UI, e.g., show a message
-      screen.value = 'landing' // Go back to landing page on error
+    } catch (err) {
+      console.error('Failed to start quiz:', err)
+      const message = err instanceof Error ? err.message : 'An unknown error occurred.'
+      error.value = `Failed to load questions: ${message}`
     } finally {
       loading.value = false
+    }
+  }
+
+  const retryQuestions = () => {
+    if (selectedCategory.value) {
+      startQuiz(selectedCategory.value)
     }
   }
 
@@ -182,6 +194,7 @@ export const useQuizStore = defineStore('quiz', () => {
     selectedAnswer,
     timer,
     loading,
+    error,
     categories,
     currentQ,
     progress,
@@ -191,5 +204,6 @@ export const useQuizStore = defineStore('quiz', () => {
     handleAnswer,
     nextQuestion,
     resetQuiz,
+    retryQuestions,
   }
 })

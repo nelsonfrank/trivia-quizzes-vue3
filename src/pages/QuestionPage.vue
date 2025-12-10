@@ -10,7 +10,24 @@
         <p class="text-white text-xl">Loading questions...</p>
       </div>
     </div>
-    <div v-else class="w-full max-w-4xl">
+
+    <!-- Error State -->
+    <div v-else-if="quiz.error" class="text-center">
+      <div class="bg-red-500/20 backdrop-blur p-12 rounded-3xl border border-red-500/50">
+        <p class="text-white text-2xl font-bold mb-4">Failed to Load Questions</p>
+        <p class="text-red-200 mb-8">{{ quiz.error }}</p>
+        <button
+          @click="quiz.retryQuestions"
+          class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full transition-all flex items-center gap-2 mx-auto"
+        >
+          <RefreshCw class="w-5 h-5" />
+          Reload
+        </button>
+      </div>
+    </div>
+
+    <!-- Quiz Content -->
+    <div v-else-if="quiz.questions.length > 0" class="w-full max-w-4xl">
       <div class="flex justify-between items-center mb-6">
         <button @click="goHome" class="flex items-center gap-2 text-white/70 hover:text-white">
           <Home class="w-5 h-5" /> Home
@@ -59,7 +76,7 @@
 
 <script setup lang="ts">
 import QuizQuestion from '../components/QuizQuestion.vue'
-import { Home, Trophy, Clock, CheckCircle, XCircle, ArrowRight } from 'lucide-vue-next'
+import { Home, Trophy, Clock, CheckCircle, XCircle, ArrowRight, RefreshCw } from 'lucide-vue-next'
 import { useQuizStore } from '../store/quizStore'
 import { useRouter } from 'vue-router'
 

@@ -3,8 +3,9 @@ import type { Category, Question, OpenTDBResponse } from '@/types/types'
 
 export const fetchQuestions = async (category: Category): Promise<Question[]> => {
   try {
+    const apiUrl = import.meta.env.VITE_TRIVIA_API_URL
     const res = await fetch(
-      `https://opentdb.com/api.php?amount=10&category=${category.apiId}&type=multiple`,
+      `${apiUrl}?amount=10&category=${category.apiId}&type=multiple`,
     )
     if (!res.ok) throw new Error('Network error')
     const data: OpenTDBResponse = await res.json()
