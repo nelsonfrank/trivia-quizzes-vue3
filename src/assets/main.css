@@ -1,3 +1,28 @@
 @import 'tailwindcss';
 
-@import './base.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+:root {
+  --color-primary: 139 92 246;
+  --color-secondary: 219 39 119;
+  --color-accent: 20 210 189;
+  --color-neutral: 209 213 219;
+  --color-base-100: 23 22 42;
+  --color-correct: 34 197 94;
+  --color-incorrect: 239 68 68;
+
+  --color-background: 23 22 42;
+  --color-foreground: 229 231 235;
+  --color-muted-foreground: 156 163 175;
+  --color-primary-foreground: 249 250 251;
+  --color-card: 30 29 51;
+  --color-border: 48 47 72;
+}
+
+body {
+  background-color: rgb(var(--color-base-100));
+  color: rgb(var(--color-neutral));
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

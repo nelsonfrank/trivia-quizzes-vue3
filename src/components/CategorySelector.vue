@@ -1,22 +1,51 @@
 <template>
-  <div class="bg-base-100/30 backdrop-blur-lg rounded-3xl p-10 shadow-2xl">
-    <h2 class="text-3xl font-bold text-neutral-100 mb-8">Select Category</h2>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+  <div class="max-w-4xl mx-auto">
+    <h2
+      class="text-center text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-8"
+    >
+      Select a Category
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <button
         v-for="cat in categories"
         :key="cat.id"
         @click="$emit('select', cat)"
         :disabled="loading"
-        class="group relative overflow-hidden rounded-2xl p-8 bg-base-100/50 transition-all hover:scale-105 hover:shadow-lg disabled:opacity-50"
-        :class="categoryStyles[cat.id]?.hoverBg"
+        class="group relative p-6 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/10 text-left"
       >
+        <!-- Gradient overlay on hover -->
         <div
-          class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-          :class="categoryStyles[cat.id]?.gradient"
-        ></div>
-        <div class="relative z-10 text-center">
-          <div class="text-6xl mb-4">{{ cat.icon }}</div>
-          <h3 class="text-xl font-bold text-neutral-100">{{ cat.name }}</h3>
+          class="absolute inset-0 rounded-2xl bg-linear-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+          :class="cat.color"
+        />
+
+        <div class="relative z-10">
+          <div
+            class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-linear-to-br mb-4 shadow-lg"
+            :class="cat.color"
+          >
+            <component :is="cat.icon" class="w-6 h-6 text-foreground" />
+          </div>
+
+          <h3 class="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+            {{ cat.name }}
+          </h3>
+          <p class="text-sm text-muted-foreground">{{ cat.description }}</p>
+        </div>
+
+        <!-- Arrow indicator -->
+        <div
+          class="absolute top-6 right-6 w-8 h-8 rounded-full bg-secondary flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0"
+        >
+          <svg
+            class="w-4 h-4 text-foreground"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
         </div>
       </button>
     </div>
@@ -28,13 +57,4 @@ import type { Category } from '@/types/types'
 
 defineProps<{ categories: Category[]; loading: boolean }>()
 defineEmits(['select'])
-
-const categoryStyles: Record<number, { gradient: string; hoverBg: string }> = {
-  9: { gradient: 'bg-gradient-to-br from-blue-500 to-cyan-500', hoverBg: 'hover:bg-blue-500/20' },
-  17: { gradient: 'bg-gradient-to-br from-purple-500 to-pink-500', hoverBg: 'hover:bg-purple-500/20' },
-  22: { gradient: 'bg-gradient-to-br from-green-500 to-teal-500', hoverBg: 'hover:bg-green-500/20' },
-  11: { gradient: 'bg-gradient-to-br from-red-500 to-orange-500', hoverBg: 'hover:bg-red-500/20' },
-  21: { gradient: 'bg-gradient-to-br from-yellow-500 to-orange-500', hoverBg: 'hover:bg-yellow-500/20' },
-  18: { gradient: 'bg-gradient-to-br from-indigo-500 to-blue-500', hoverBg: 'hover:bg-indigo-500/20' },
-}
 </script>

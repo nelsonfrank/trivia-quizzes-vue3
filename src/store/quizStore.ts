@@ -3,6 +3,14 @@ import { ref, computed, onUnmounted } from 'vue'
 
 import { fetchQuestions } from '@/services/quizService'
 import type { Category, Question } from '@/types/types'
+import {
+  BrainCircuit,
+  Microscope,
+  Globe,
+  Film,
+  Trophy,
+  Monitor,
+} from 'lucide-vue-next'
 
 export type { Category } from '@/types/types'
 
@@ -23,19 +31,57 @@ export const useQuizStore = defineStore('quiz', () => {
     {
       id: 9,
       name: 'General Knowledge',
-      icon: '🎯',
+      icon: BrainCircuit,
       apiId: 9,
+      color: 'from-rose-500 to-orange-500',
+      lightColor: 'bg-rose-500/10',
+      description: 'Test your wits',
     },
     {
       id: 17,
       name: 'Science & Nature',
-      icon: '🔬',
+      icon: Microscope,
       apiId: 17,
+      color: 'from-cyan-500 to-blue-500',
+      lightColor: 'bg-cyan-500/10',
+      description: 'Explore discoveries',
     },
-    { id: 22, name: 'Geography', icon: '🌍', apiId: 22 },
-    { id: 11, name: 'Movies', icon: '🎬', apiId: 11 },
-    { id: 21, name: 'Sports', icon: '🏆', apiId: 21 },
-    { id: 18, name: 'Computers', icon: '💻', apiId: 18 },
+    {
+      id: 22,
+      name: 'Geography',
+      icon: Globe,
+      apiId: 22,
+      color: 'from-emerald-500 to-teal-500',
+      lightColor: 'bg-emerald-500/10',
+      description: 'Around the world',
+    },
+    {
+      id: 11,
+      name: 'Movies',
+      icon: Film,
+      apiId: 11,
+      color: 'from-purple-500 to-pink-500',
+      lightColor: 'bg-purple-500/10',
+      description: 'Cinema classics',
+    },
+    {
+      id: 21,
+      name: 'Sports',
+      icon: Trophy,
+      apiId: 21,
+      color: 'from-amber-500 to-yellow-500',
+      lightColor: 'bg-amber-500/10',
+      description: 'Game on',
+    },
+    {
+      id: 18,
+      name: 'Computers',
+      icon: Monitor,
+      apiId: 18,
+      color: 'from-indigo-500 to-violet-500',
+      lightColor: 'bg-indigo-500/10',
+      description: 'Tech savvy',
+    },
   ])
 
   // Getters (Computed)

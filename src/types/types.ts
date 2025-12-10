@@ -1,8 +1,13 @@
+import type { FunctionalComponent } from 'vue'
+
 export interface Category {
   id: number
   name: string
-  icon: string
+  icon: FunctionalComponent
   apiId: number
+  color: string
+  lightColor: string
+  description: string
 }
 
 export interface Question {
