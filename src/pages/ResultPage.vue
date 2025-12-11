@@ -3,11 +3,11 @@
     class="min-h-screen bg-linear-to-br from-purple-700 via-pink-600 to-red-600 flex items-center justify-center p-6"
   >
     <div class="max-w-2xl w-full text-center">
-      <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-16 shadow-2xl">
-        <div class="text-9xl mb-6">{{ quiz.resultMessage.emoji }}</div>
-        <h1 class="text-5xl font-bold text-white mb-6">{{ quiz.resultMessage.msg }}</h1>
+      <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-4 md:p-16 shadow-2xl">
+        <div class="text-6xl md:text-9xl mb-6">{{ quiz.resultMessage.emoji }}</div>
+        <h1 class="text-3xl md:text-5xl font-bold text-white mb-6">{{ quiz.resultMessage.msg }}</h1>
         <div class="bg-white/20 rounded-2xl p-10 mb-10">
-          <div class="text-8xl font-bold text-white">
+          <div class="text-6xl md:text-8xl font-bold text-white">
             {{ quiz.score }} / {{ quiz.questions.length }}
           </div>
           <div class="text-3xl text-white/90 mt-4">{{ quiz.percentage }}% Correct</div>

@@ -1,9 +1,11 @@
 <template>
-  <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-10 shadow-2xl">
+  <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-4 md:p-10 shadow-2xl">
     <div class="mb-6">
       <slot name="progress"></slot>
     </div>
-    <h2 class="text-3xl font-bold text-white mb-10 leading-relaxed">{{ question.q }}</h2>
+    <h2 class="text-2xl md:text-3xl font-bold text-white mb-10 leading-relaxed">
+      {{ question.q }}
+    </h2>
     <div class="flex flex-col gap-4">
       <button
         v-for="(answer, i) in question.a"
